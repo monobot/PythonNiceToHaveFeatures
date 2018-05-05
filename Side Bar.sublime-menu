@@ -1,0 +1,15 @@
+[
+    { "caption": "-", "id": "nth" },
+    {
+        "command": "relative_path",
+        "caption": "Relative Path To Clipboard"
+    },
+    {
+        "command": "package_relative_path",
+        "caption": "Relative Package Path To Clipboard"
+    },
+    {
+        "command": "filename",
+        "caption": "Filename To Clipboard"
+    }
+]

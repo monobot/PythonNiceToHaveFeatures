@@ -1,0 +1,26 @@
+[
+    {
+        "command": "relative_path",
+        "caption": "Relative Path To Clipboard"
+    },
+    {
+        "command": "package_relative_path",
+        "caption": "Relative Package Path To Clipboard"
+    },
+    {
+        "command": "filename",
+        "caption": "Filename To Clipboard"
+    },
+    {
+        "command": "convert_camelcase",
+        "caption": "Refactor to camelcase"
+    },
+    {
+        "command": "convert_underscore",
+        "caption": "Refactor to underscore"
+    },
+    {
+        "command": "cap_first",
+        "caption": "Refactor to capfirst"
+    }
+]
