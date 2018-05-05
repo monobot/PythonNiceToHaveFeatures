@@ -1,0 +1,8 @@
+{
+    "dependencies": [],
+    "sublime_text": ">3100",
+    "platforms": ["*"],
+    "description": "Nice to have features for SublimeText3 and python development.",
+    "version": "0.0.1",
+    "url": "https://github.com/monobot/st3_python_nice_to_have"
+}
