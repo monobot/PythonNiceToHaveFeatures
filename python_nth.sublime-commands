@@ -12,15 +12,15 @@
         "caption": "Filename To Clipboard"
     },
     {
-        "command": "convert_camelcase",
+        "command": "refactor_camelcase",
         "caption": "Refactor to camelcase"
     },
     {
-        "command": "convert_underscore",
+        "command": "refactor_underscore",
         "caption": "Refactor to underscore"
     },
     {
-        "command": "cap_first",
+        "command": "refactor_capfirst",
         "caption": "Refactor to capfirst"
     }
 ]

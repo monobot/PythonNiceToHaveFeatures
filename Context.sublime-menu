@@ -13,11 +13,15 @@
         "caption": "Filename To Clipboard"
     },
     {
-        "command": "package_relative_path",
-        "caption": "Relative Package Path To Clipboard"
+        "command": "refactor_camelcase",
+        "caption": "Refactor to camelcase"
     },
     {
-        "command": "filename",
-        "caption": "Filename To Clipboard"
+        "command": "refactor_underscore",
+        "caption": "Refactor to underscore"
+    },
+    {
+        "command": "refactor_capfirst",
+        "caption": "Refactor to capfirst"
     }
 ]

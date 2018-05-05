@@ -45,8 +45,13 @@ class RegionModifier(sublime_plugin.TextCommand):
     def run(self, edit):
         for sel in self.view.sel():
             current_text = self.view.substr(sel)
+            already_changed = []
             while self.view.find(current_text, 0):
                 sub_sel = self.view.find(current_text, 0)
+                if sub_sel not in already_changed:
+                    already_changed.append(sub_sel)
+                else:
+                    break
                 self.view.replace(
                     edit,
                     sub_sel,
@@ -54,12 +59,12 @@ class RegionModifier(sublime_plugin.TextCommand):
                 )
 
 
-class ConvertCamelcaseCommand(RegionModifier):
+class RefactorCamelcaseCommand(RegionModifier):
 
     def converter(self, txt):
         response_txt = txt.lstrip().lstrip('_')
         if response_txt:
-            normalized_txt = txt.lower().replace('_', '||').replace(' ', '||')
+            normalized_txt = txt.replace('_', '||').replace(' ', '||')
 
             response_txt = ''
             cap_next = False
@@ -76,7 +81,7 @@ class ConvertCamelcaseCommand(RegionModifier):
         return response_txt
 
 
-class ConvertUnderscoreCommand(RegionModifier):
+class RefactorUnderscoreCommand(RegionModifier):
 
     def converter(self, txt):
         response_txt = txt.lstrip()
@@ -91,7 +96,7 @@ class ConvertUnderscoreCommand(RegionModifier):
         return txt[::-1]
 
 
-class CapFirstCommand(RegionModifier):
+class RefactorCapfirstCommand(RegionModifier):
 
     def converter(self, txt):
         if txt:
