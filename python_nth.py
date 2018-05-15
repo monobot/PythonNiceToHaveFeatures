@@ -13,7 +13,7 @@ class TextBaseCommand(sublime_plugin.TextCommand):
         return min(
             (
                 os.path.relpath(self.view.file_name(), folder)
-                for folder in sublime.active_window().folders()
+                for folder in self.view.window().folders()
             ),
             key=len,
         )

@@ -1,15 +1,15 @@
 [
     {
         "command": "relative_path",
-        "caption": "Relative Path To Clipboard"
+        "caption": "Copy Relative Path To Clipboard"
     },
     {
         "command": "package_relative_path",
-        "caption": "Relative Package Path To Clipboard"
+        "caption": "Copy Relative Package Path To Clipboard"
     },
     {
         "command": "filename",
-        "caption": "Filename To Clipboard"
+        "caption": "Copy Filename To Clipboard"
     },
     {
         "command": "refactor_camelcase",
