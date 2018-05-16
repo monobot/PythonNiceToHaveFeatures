@@ -4,7 +4,7 @@ import sublime
 import sublime_plugin
 
 
-class TextBaseCommand(sublime_plugin.TextCommand):
+class _FileBaseClass(sublime_plugin.TextCommand):
 
     def is_enabled(self):
         return bool(self.view.file_name())
@@ -19,25 +19,42 @@ class TextBaseCommand(sublime_plugin.TextCommand):
         )
 
 
-class RelativePathCommand(TextBaseCommand):
+class CopyRelativePathCommand(_FileBaseClass):
     def run(self, edit):
         minimal_path = self.get_path()
         sublime.set_clipboard(minimal_path)
 
 
-class PackageRelativePathCommand(TextBaseCommand):
+class CopyPackageRelativePathCommand(_FileBaseClass):
     def run(self, edit):
         minimal_path = self.get_path()
         trim_file_extension = '.'.join(minimal_path.split('.')[:-1])
         sublime.set_clipboard(trim_file_extension.replace('/', '.'))
 
 
-class FilenameCommand(TextBaseCommand):
+class CopyReferenceCommand(_FileBaseClass):
+    def is_enabled(self):
+        return len(self.view.sel()) == 1
+
     def run(self, edit):
-        sublime.set_clipboard(self.view.file_name().split('/')[-1])
+        minimal_path = self.get_path()
+        trim_file_extension = '.'.join(minimal_path.split('.')[:-1])
+        reference = self.view.sel()[0]
+        if reference.begin() == reference.end():
+            reference = self.view.word(reference)
+
+        trim_file_extension += '.' + self.view.substr(reference)
+        sublime.set_clipboard(trim_file_extension.replace('/', '.'))
 
 
-class RegionModifier(sublime_plugin.TextCommand):
+class CopyFilenameCommand(_FileBaseClass):
+    def run(self, edit):
+        minimal_path = self.get_path()
+        trim_file_extension = '.'.join(minimal_path.split('.')[:-1])
+        sublime.set_clipboard(trim_file_extension.replace('/', '.'))
+
+
+class _RegionBaseClass(sublime_plugin.TextCommand):
 
     def is_enabled(self):
         return bool(self.view.sel())
@@ -59,7 +76,7 @@ class RegionModifier(sublime_plugin.TextCommand):
                 )
 
 
-class RefactorCamelcaseCommand(RegionModifier):
+class RefactorCamelcaseCommand(_RegionBaseClass):
 
     def converter(self, txt):
         response_txt = txt.lstrip().lstrip('_')
@@ -81,7 +98,7 @@ class RefactorCamelcaseCommand(RegionModifier):
         return response_txt
 
 
-class RefactorUnderscoreCommand(RegionModifier):
+class RefactorUnderscoreCommand(_RegionBaseClass):
 
     def converter(self, txt):
         response_txt = txt.lstrip()
@@ -96,7 +113,7 @@ class RefactorUnderscoreCommand(RegionModifier):
         return txt[::-1]
 
 
-class RefactorCapfirstCommand(RegionModifier):
+class RefactorCapfirstCommand(_RegionBaseClass):
 
     def converter(self, txt):
         if txt:

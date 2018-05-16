@@ -1,14 +1,18 @@
 [
     {
-        "command": "relative_path",
+        "command": "copy_relative_path",
         "caption": "Copy Relative Path To Clipboard"
     },
     {
-        "command": "package_relative_path",
+        "command": "copy_package_relative_path",
         "caption": "Copy Relative Package Path To Clipboard"
     },
     {
-        "command": "filename",
+        "command": "copy_reference",
+        "caption": "Copy reference of the item (selected or under the cursor) to clipboard"
+    },
+    {
+        "command": "copy_filename",
         "caption": "Copy Filename To Clipboard"
     },
     {
