@@ -10,13 +10,14 @@ class _FileBaseClass(sublime_plugin.TextCommand):
         return bool(self.view.file_name())
 
     def get_path(self):
-        return min(
+        minimal_path = min(
             (
                 os.path.relpath(self.view.file_name(), folder)
                 for folder in self.view.window().folders()
             ),
             key=len,
         )
+        return '.'.join(minimal_path.split('.')[:-1])
 
 
 class CopyRelativePathCommand(_FileBaseClass):
@@ -38,13 +39,40 @@ class CopyReferenceCommand(_FileBaseClass):
 
     def run(self, edit):
         minimal_path = self.get_path()
-        trim_file_extension = '.'.join(minimal_path.split('.')[:-1])
         reference = self.view.sel()[0]
         if reference.begin() == reference.end():
             reference = self.view.word(reference)
 
-        trim_file_extension += '.' + self.view.substr(reference)
-        sublime.set_clipboard(trim_file_extension.replace('/', '.'))
+        minimal_path += '.' + self.view.substr(reference)
+        sublime.set_clipboard(minimal_path.replace('/', '.'))
+
+
+class CreatePackageDirectoryCommand(_FileBaseClass):
+    def run(self, edit):
+        def on_done(input_string):
+            target_dir = os.path.join(
+                os.path.dirname(self.view.file_name()),
+                input_string
+            )
+            os.makedirs(target_dir)
+
+            init_filename = os.path.join(target_dir, '__init__.py')
+            os.open(init_filename, os.O_CREAT).close()
+
+        def on_change(input_string):
+            print("Input changed: %s" % input_string)
+
+        def on_cancel():
+            print("User cancelled the input")
+
+        window = self.view.window()
+        window.show_input_panel(
+            "SubPackage name:",
+            "directory",
+            on_done,
+            on_change,
+            on_cancel
+        )
 
 
 class CopyFilenameCommand(_FileBaseClass):

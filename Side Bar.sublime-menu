@@ -11,5 +11,9 @@
     {
         "command": "filename",
         "caption": "Filename To Clipboard"
+    },
+    {
+        "command": "create_package_directory",
+        "caption": "Create new Python SubPackage"
     }
 ]
