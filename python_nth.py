@@ -6,10 +6,7 @@ import sublime_plugin
 
 class _FileBaseClass(sublime_plugin.TextCommand):
 
-    def is_enabled(self):
-        return bool(self.view.file_name())
-
-    def get_path(self):
+    def get_minimal_path(self):
         minimal_path = min(
             (
                 os.path.relpath(self.view.file_name(), folder)
@@ -21,24 +18,26 @@ class _FileBaseClass(sublime_plugin.TextCommand):
 
 
 class CopyRelativePathCommand(_FileBaseClass):
+
     def run(self, edit):
-        minimal_path = self.get_path()
+        minimal_path = self.get_minimal_path()
         sublime.set_clipboard(minimal_path)
 
 
 class CopyPackageRelativePathCommand(_FileBaseClass):
+
     def run(self, edit):
-        minimal_path = self.get_path()
-        trim_file_extension = '.'.join(minimal_path.split('.')[:-1])
+        trim_file_extension = self.get_minimal_path()
         sublime.set_clipboard(trim_file_extension.replace('/', '.'))
 
 
 class CopyReferenceCommand(_FileBaseClass):
+
     def is_enabled(self):
         return len(self.view.sel()) == 1
 
     def run(self, edit):
-        minimal_path = self.get_path()
+        minimal_path = self.get_minimal_path()
         reference = self.view.sel()[0]
         if reference.begin() == reference.end():
             reference = self.view.word(reference)
@@ -48,27 +47,32 @@ class CopyReferenceCommand(_FileBaseClass):
 
 
 class CreatePackageDirectoryCommand(_FileBaseClass):
+
     def run(self, edit):
         def on_done(input_string):
-            target_dir = os.path.join(
-                os.path.dirname(self.view.file_name()),
-                input_string
-            )
-            os.makedirs(target_dir)
+            if input_string:
+                target_dir = os.path.join(
+                    os.path.dirname(self.view.file_name()),
+                    input_string
+                )
+                os.makedirs(target_dir)
 
-            init_filename = os.path.join(target_dir, '__init__.py')
-            os.open(init_filename, os.O_CREAT).close()
+                init_filename = os.path.join(target_dir, '__init__.py')
+                os.open(init_filename, os.O_CREAT).close()
+            else:
+                on_cancel()
 
         def on_change(input_string):
-            print("Input changed: %s" % input_string)
+            if input_string:
+                print('Creating sub-package "%s"' % input_string)
 
         def on_cancel():
-            print("User cancelled the input")
+            print('User cancelled the input')
 
         window = self.view.window()
         window.show_input_panel(
-            "SubPackage name:",
-            "directory",
+            'SubPackage name:',
+            '',
             on_done,
             on_change,
             on_cancel
@@ -76,9 +80,9 @@ class CreatePackageDirectoryCommand(_FileBaseClass):
 
 
 class CopyFilenameCommand(_FileBaseClass):
+
     def run(self, edit):
-        minimal_path = self.get_path()
-        trim_file_extension = '.'.join(minimal_path.split('.')[:-1])
+        trim_file_extension = self.get_minimal_path()
         sublime.set_clipboard(trim_file_extension.replace('/', '.'))
 
 
