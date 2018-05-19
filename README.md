@@ -1,13 +1,21 @@
-# st3 python nice to have features
-Nice to have features for SublimeText3 and python development
+# SublimeText3 PythonNiceToHaveFeatures
+**_PythonNiceToHaveFeatures_** are a set of features usually included in IDEs that are not present in SublimeText.
 
-The next commands are included:
-* Relative Path To Clipboard, Copìes to the clipboard the relative path of the file in your active view or selected on the side menu
-* Relative Package Path To Clipboard, Copìes to the clipboard the (package style) relative path of the file in your active view or selected on the side menu
-* Filename To Clipboard, Copìes to the clipboard the file name of the file in your active view or selected on the side menu
-* Refactor to camelcase, Refactors to "camelCase" all recurrences of the selected regions in the active view.
-* Refactor to underscore, Refactors to "underscore_case" all recurrences of the selected regions in the active view.
-* Refactor to capfirst, Refactors to "Capfirst" all recurrences of the selected regions in the active view.
+## Refactor Commands
+They are available in the context menu of the opened file and affect only to that file (we can not do that refactor in the whole project because SublimeText doesn't know the whole context of the project and its better to be safe than sorry)
+These commands affect to each and all the selected regions.
 
-Added to context menu and side menu:
-"Relative Path To Clipboard", "Relative Package Path To Clipboard" and "Filename To Clipboard"
+- Refactor to _ClassCase_
+- Refactor to _under\_score\_case_
+- Refactor to _camelCase_
+- Refactor to _Capfirst_
+
+## File Commands
+These commands are available both in the sidebar menu and the file context menu.
+
+- Copy relative path to clipboard
+- Copy relative path in package mode to clipboard
+- Copy reference in package mode to clipboard
+    + Will copy the reference of the selection or word
+- Copy filename to clipboard
+- Create Package (and __init__.py file) (only side bar menu)

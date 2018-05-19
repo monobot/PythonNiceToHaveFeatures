@@ -16,15 +16,23 @@
         "caption": "Copy Filename To Clipboard"
     },
     {
-        "command": "refactor_camelcase",
-        "caption": "Refactor to camelcase"
+        "command": "copy_filename",
+        "caption": "Filename To Clipboard"
+    },
+    {
+        "command": "refactor_class_case",
+        "caption": "Refactor to 'ClassCase'"
     },
     {
         "command": "refactor_underscore",
-        "caption": "Refactor to underscore"
+        "caption": "Refactor to 'under_score'"
+    },
+    {
+        "command": "refactor_camelcase",
+        "caption": "Refactor to 'camelCase'"
     },
     {
         "command": "refactor_capfirst",
-        "caption": "Refactor to capfirst"
+        "caption": "Refactor to 'Capfirst'"
     }
 ]
