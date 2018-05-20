@@ -1,5 +1,5 @@
 [
-    { "caption": "-", "id": "python_nice_to_have" },
+    { "caption": "-", "id": "python_nice_to_have_features paths" },
     {
         "command": "copy_relative_path",
         "caption": "Relative Path To Clipboard"
@@ -17,6 +17,11 @@
         "caption": "Filename To Clipboard"
     },
     {
+        "command": "create_package_directory",
+        "caption": "Create new Python SubPackage"
+    },
+    { "caption": "-", "id": "python_nice_to_have_features refactor" },
+    {
         "command": "refactor_class_case",
         "caption": "Refactor to 'ClassCase'"
     },
@@ -32,6 +37,7 @@
         "command": "refactor_capfirst",
         "caption": "Refactor to 'Capfirst'"
     },
+    { "caption": "-", "id": "python_nice_to_have_features create" },
     {
         "command": "create_function",
         "caption": "Create function from selection"
