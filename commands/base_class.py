@@ -1,8 +1,7 @@
 import os
-import sublime_plugin
 
 
-class CommandBaseClass(sublime_plugin.TextCommand):
+class CommandBaseClass:
     # selection methods
 
     def _reset_position(self, position, offset):

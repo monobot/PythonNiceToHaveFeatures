@@ -1,9 +1,11 @@
 from string import ascii_uppercase
 
+import sublime_plugin
+
 from .base_class import CommandBaseClass
 
 
-class _RegionBaseClass(CommandBaseClass):
+class _RegionBaseClass(sublime_plugin.TextCommand, CommandBaseClass):
 
     def is_enabled(self):
         return self._selection()

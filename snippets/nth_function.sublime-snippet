@@ -1,0 +1,13 @@
+<snippet>
+    <content><![CDATA[(${2:args}, ${3:kwargs}):
+    '''
+    ${1:DESCRIPTION}
+    :args: ${2}
+    :kwargs: ${3}
+    :returns: ${4:True}
+    '''
+    return ${4}
+
+
+]]></content>
+</snippet>

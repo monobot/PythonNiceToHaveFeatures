@@ -1,0 +1,17 @@
+<snippet>
+    <content><![CDATA[(${0:object}):
+    '''
+    ${1:DESCRIPTION}
+    '''
+    def __init__(${2:args}, ${3:kwargs}):
+        ''' __init__
+        :args: ${2}
+        :kwargs: ${3}
+        :returns: ${4:True}
+        '''
+        return ${4}
+
+
+
+]]></content>
+</snippet>

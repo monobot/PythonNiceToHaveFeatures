@@ -1,24 +1,26 @@
 import os
 import sublime
+import sublime_plugin
 
 from .base_class import CommandBaseClass
 
 
-class CopyRelativePathCommand(CommandBaseClass):
+class CopyRelativePathCommand(sublime_plugin.TextCommand, CommandBaseClass):
 
     def run(self, edit):
         minimal_path = self._get_minimal_path()
         sublime.set_clipboard(minimal_path)
 
 
-class CopyPackageRelativePathCommand(CommandBaseClass):
+class CopyPackageRelativePathCommand(
+        sublime_plugin.TextCommand, CommandBaseClass):
 
     def run(self, edit):
         trim_file_extension = self._get_minimal_path()
         sublime.set_clipboard(trim_file_extension.replace('/', '.'))
 
 
-class CopyReferenceCommand(CommandBaseClass):
+class CopyReferenceCommand(sublime_plugin.TextCommand, CommandBaseClass):
 
     def is_enabled(self):
         return self._one_word_selected()
@@ -33,14 +35,15 @@ class CopyReferenceCommand(CommandBaseClass):
         sublime.set_clipboard(minimal_path.replace('/', '.'))
 
 
-class CopyFilenameCommand(CommandBaseClass):
+class CopyFilenameCommand(sublime_plugin.TextCommand, CommandBaseClass):
 
     def run(self, edit):
         trim_file_extension = self._get_minimal_path()
         sublime.set_clipboard(trim_file_extension.replace('/', '.'))
 
 
-class CreatePackageDirectoryCommand(CommandBaseClass):
+class CreatePackageDirectoryCommand(
+        sublime_plugin.TextCommand, CommandBaseClass):
 
     def run(self, edit):
         def on_done(input_string):
