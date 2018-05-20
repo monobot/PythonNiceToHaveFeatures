@@ -19,3 +19,10 @@ These commands are available both in the sidebar menu and the file context menu.
     + Will copy the reference of the selection or word
 - Copy filename to clipboard
 - Create Package (and __init__.py file) (only side bar menu)
+
+## Create Commands
+These commands are available in file context menu.
+
+- Create function from word
+- Create class from word
+- Create method from word
