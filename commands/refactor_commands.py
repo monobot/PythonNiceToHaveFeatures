@@ -1,16 +1,12 @@
-import sublime_plugin
-
 from string import ascii_uppercase
 
+from .base_class import CommandBaseClass
 
-class _RegionBaseClass(sublime_plugin.TextCommand):
 
-    @staticmethod
-    def _normalize_text(txt):
-        return txt.replace('_', '|').replace('-', '|').replace(' ', '|')
+class _RegionBaseClass(CommandBaseClass):
 
     def is_enabled(self):
-        return bool(self.view.sel())
+        return self._selection()
 
     def run(self, edit):
         for sel in self.view.sel():

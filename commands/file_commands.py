@@ -1,42 +1,30 @@
 import os
 import sublime
-import sublime_plugin
+
+from .base_class import CommandBaseClass
 
 
-class _FileBaseClass(sublime_plugin.TextCommand):
-
-    def get_minimal_path(self):
-        minimal_path = min(
-            (
-                os.path.relpath(self.view.file_name(), folder)
-                for folder in self.view.window().folders()
-            ),
-            key=len,
-        )
-        return '.'.join(minimal_path.split('.')[:-1])
-
-
-class CopyRelativePathCommand(_FileBaseClass):
+class CopyRelativePathCommand(CommandBaseClass):
 
     def run(self, edit):
-        minimal_path = self.get_minimal_path()
+        minimal_path = self._get_minimal_path()
         sublime.set_clipboard(minimal_path)
 
 
-class CopyPackageRelativePathCommand(_FileBaseClass):
+class CopyPackageRelativePathCommand(CommandBaseClass):
 
     def run(self, edit):
-        trim_file_extension = self.get_minimal_path()
+        trim_file_extension = self._get_minimal_path()
         sublime.set_clipboard(trim_file_extension.replace('/', '.'))
 
 
-class CopyReferenceCommand(_FileBaseClass):
+class CopyReferenceCommand(CommandBaseClass):
 
     def is_enabled(self):
-        return len(self.view.sel()) == 1
+        return self._one_word_selected()
 
     def run(self, edit):
-        minimal_path = self.get_minimal_path()
+        minimal_path = self._get_minimal_path()
         reference = self.view.sel()[0]
         if reference.begin() == reference.end():
             reference = self.view.word(reference)
@@ -45,14 +33,14 @@ class CopyReferenceCommand(_FileBaseClass):
         sublime.set_clipboard(minimal_path.replace('/', '.'))
 
 
-class CopyFilenameCommand(_FileBaseClass):
+class CopyFilenameCommand(CommandBaseClass):
 
     def run(self, edit):
-        trim_file_extension = self.get_minimal_path()
+        trim_file_extension = self._get_minimal_path()
         sublime.set_clipboard(trim_file_extension.replace('/', '.'))
 
 
-class CreatePackageDirectoryCommand(_FileBaseClass):
+class CreatePackageDirectoryCommand(CommandBaseClass):
 
     def run(self, edit):
         def on_done(input_string):
@@ -64,13 +52,12 @@ class CreatePackageDirectoryCommand(_FileBaseClass):
                 os.makedirs(target_dir)
 
                 init_filename = os.path.join(target_dir, '__init__.py')
-                os.open(init_filename, os.O_CREAT).close()
+                os.open(init_filename, os.O_CREAT)
             else:
                 on_cancel()
 
         def on_change(input_string):
-            if input_string:
-                print('Creating sub-package "%s"' % input_string)
+            pass
 
         def on_cancel():
             print('User cancelled the input')

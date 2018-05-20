@@ -31,5 +31,17 @@
     {
         "command": "refactor_capfirst",
         "caption": "Refactor to 'Capfirst'"
+    },
+    {
+        "command": "create_function",
+        "caption": "Create function from selection"
+    },
+    {
+        "command": "create_class",
+        "caption": "Create class from selection"
+    },
+    {
+        "command": "create_method",
+        "caption": "Create method from selection"
     }
 ]
