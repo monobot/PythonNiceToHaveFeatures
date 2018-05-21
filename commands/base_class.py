@@ -29,4 +29,4 @@ class CommandBaseClass:
             ),
             key=len,
         )
-        return '.'.join(minimal_path.split('.')[:-1])
+        return minimal_path

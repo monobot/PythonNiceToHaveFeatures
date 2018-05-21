@@ -16,8 +16,9 @@ class CopyPackageRelativePathCommand(
         sublime_plugin.TextCommand, CommandBaseClass):
 
     def run(self, edit):
-        trim_file_extension = self._get_minimal_path()
-        sublime.set_clipboard(trim_file_extension.replace('/', '.'))
+        minimal_path = self._get_minimal_path()
+        dotted_path = '.'.join(minimal_path.split('.')[:-1])
+        sublime.set_clipboard('.'.join(dotted_path.split(os.sep)))
 
 
 class CopyReferenceCommand(sublime_plugin.TextCommand, CommandBaseClass):
@@ -32,14 +33,14 @@ class CopyReferenceCommand(sublime_plugin.TextCommand, CommandBaseClass):
             reference = self.view.word(reference)
 
         minimal_path += '.' + self.view.substr(reference)
-        sublime.set_clipboard(minimal_path.replace('/', '.'))
+        sublime.set_clipboard(minimal_path.replace(os.sep, '.'))
 
 
 class CopyFilenameCommand(sublime_plugin.TextCommand, CommandBaseClass):
 
     def run(self, edit):
-        trim_file_extension = self._get_minimal_path()
-        sublime.set_clipboard(trim_file_extension.replace('/', '.'))
+        minimal_path = self._get_minimal_path()
+        sublime.set_clipboard(minimal_path.split(os.sep)[1])
 
 
 class CreatePackageDirectoryCommand(

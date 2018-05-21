@@ -6,7 +6,8 @@ from .base_class import CommandBaseClass
 class CreateBaseCommand(sublime_plugin.TextCommand, CommandBaseClass):
     indt = 0
     steps = -3
-    snippet_path = 'Packages/PythonNiceToHave/snippets/{}.sublime-snippet'
+    snippet_path = (
+        'Packages/PythonNiceToHaveFeatures/snippets/{}.sublime-snippet')
 
     def _snippet(self):
         return self.snippet_path.format(self.snippet)
