@@ -32,8 +32,10 @@ class CopyReferenceCommand(sublime_plugin.TextCommand, CommandBaseClass):
         if reference.begin() == reference.end():
             reference = self.view.word(reference)
 
-        minimal_path += '.' + self.view.substr(reference)
-        sublime.set_clipboard(minimal_path.replace(os.sep, '.'))
+        strip_extension = '.'.join(minimal_path.split('.')[:-1])
+        strip_extension += '.' + self.view.substr(reference)
+        dotted_path = strip_extension.replace(os.sep, '.')
+        sublime.set_clipboard(dotted_path)
 
 
 class CopyFilenameCommand(sublime_plugin.TextCommand, CommandBaseClass):
