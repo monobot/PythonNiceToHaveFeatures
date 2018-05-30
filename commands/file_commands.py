@@ -18,7 +18,7 @@ class CopyPackageRelativePathCommand(
     def run(self, edit):
         minimal_path = self._get_minimal_path()
         dotted_path = '.'.join(minimal_path.split('.')[:-1])
-        sublime.set_clipboard('.'.join(dotted_path.split(os.sep)))
+        sublime.set_clipboard('.'.join(dotted_path.split(os.sep)).lstrip('.'))
 
 
 class CopyReferenceCommand(sublime_plugin.TextCommand, CommandBaseClass):
@@ -34,7 +34,7 @@ class CopyReferenceCommand(sublime_plugin.TextCommand, CommandBaseClass):
 
         strip_extension = '.'.join(minimal_path.split('.')[:-1])
         strip_extension += '.' + self.view.substr(reference)
-        dotted_path = strip_extension.replace(os.sep, '.')
+        dotted_path = strip_extension.replace(os.sep, '.').lstrip('.')
         sublime.set_clipboard(dotted_path)
 
 
