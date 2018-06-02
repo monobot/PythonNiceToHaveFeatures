@@ -9,6 +9,7 @@ from .file_commands import (
     CopyReferenceCommand,
     CopyRelativePathCommand,
     CreatePackageDirectoryCommand,
+    ImportFromReferenceToClipboardCommand,
 )
 from .refactor_commands import (
     RefactorCamelcaseCommand,
@@ -26,6 +27,7 @@ __all__ = (
     'CreateFunctionCommand',
     'CreateMethodCommand',
     'CreatePackageDirectoryCommand',
+    'ImportFromReferenceToClipboardCommand',
     'RefactorCamelcaseCommand',
     'RefactorCapfirstCommand',
     'RefactorClassCaseCommand',

@@ -38,6 +38,28 @@ class CopyReferenceCommand(sublime_plugin.TextCommand, CommandBaseClass):
         sublime.set_clipboard(dotted_path)
 
 
+class ImportFromReferenceToClipboardCommand(
+        sublime_plugin.TextCommand, CommandBaseClass):
+
+    def is_enabled(self):
+        return self._is_python() and self._one_word_selected()
+
+    def run(self, edit):
+        minimal_path = self._get_minimal_path()
+        reference = self.view.sel()[0]
+        if reference.begin() == reference.end():
+            reference = self.view.word(reference)
+
+        strip_extension = '.'.join(minimal_path.split('.')[:-1])
+        strip_extension += '.' + self.view.substr(reference)
+        dotted_path = strip_extension.replace(os.sep, '.').lstrip('.')
+        import_string = 'from {} import {}'.format(
+            '.'.join(dotted_path.split('.')[:-1]),
+            dotted_path.split('.')[-1],
+        )
+        sublime.set_clipboard(import_string)
+
+
 class CopyFilenameCommand(sublime_plugin.TextCommand, CommandBaseClass):
 
     def run(self, edit):

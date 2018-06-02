@@ -17,6 +17,7 @@ These commands are available both in the sidebar menu and the file context menu.
 - Copy relative path in package mode to clipboard
 - Copy reference in package mode to clipboard
     + Will copy the reference of the selection or word
+- Copy import sentence of the selected string to the clipboard
 - Copy filename to clipboard
 - Create Package (and __init__.py file) (only side bar menu)
 

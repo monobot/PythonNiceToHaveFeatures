@@ -4,6 +4,9 @@ import os
 class CommandBaseClass:
     # selection methods
 
+    def _is_python(self):
+        return self.view.file_name().split('.')[-1] == 'py'
+
     def _reset_position(self, position, offset):
         self.view.sel().clear()
         self.view.sel().add(position + offset)

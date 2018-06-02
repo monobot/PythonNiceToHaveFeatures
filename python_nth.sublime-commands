@@ -12,6 +12,10 @@
         "caption": "Copy reference of the item (selected or under the cursor) to clipboard"
     },
     {
+        "command": "import_from_reference_to_clipboard",
+        "caption": "Create import sentence for the selected item and paste to clipboard"
+    },
+    {
         "command": "copy_filename",
         "caption": "Copy Filename To Clipboard"
     },

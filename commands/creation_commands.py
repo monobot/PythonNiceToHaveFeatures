@@ -13,8 +13,7 @@ class CreateBaseCommand(sublime_plugin.TextCommand, CommandBaseClass):
         return self.snippet_path.format(self.snippet)
 
     def is_enabled(self):
-        is_python = self.view.file_name().split('.')[-1] == 'py'
-        return is_python and self._one_word_selected()
+        return self._is_python() and self._one_word_selected()
 
     def _insert(self, symbol, position):
         content = self.text_type.format(
